@@ -1,0 +1,7 @@
+ecdsa
+cryptography
+asn1crypto
+base58
+aiohttp
+requests
+websockets
