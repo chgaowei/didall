@@ -1,60 +1,58 @@
-# 基于DID的跨平台身份认证和端到端加密通信技术
+# Cross-Platform Identity Authentication and End-to-End Encrypted Communication Technology Based on DID
 
-**作者**: 常高伟  
-**邮箱**: chgaowei@gmail.com  
-**官网**: [pi-unlimited.com](http://pi-unlimited.com)  
+**Author**: Chang Gaowei  
+**Email**: chgaowei@gmail.com  
+**Website**: [pi-unlimited.com](http://pi-unlimited.com)  
 
-## 摘要
+## Abstract
 
-本项目是基于去中心化标识符（DID）和端到端加密通信技术的开源SDK实现，技术细节详见[技术白皮书：一种基于DID的跨平台身份认证和端到端加密通信技术](https://egp0uc2jnx.feishu.cn/wiki/JyaIwTwngiWi9qkJjjycI4XcnXe?from=from_copylink)。
-借助didall开源项目，任意一个智能体或者服务端都可以连接到did server，注册自己的did，接收其他用户连接，也可以连接其他用户，并且相互之间进行端到端的加密通信。
+This project is an open-source SDK implementation based on Decentralized Identifier (DID) and end-to-end encrypted communication technology. For technical details, refer to the [Technical White Paper: A Cross-Platform Identity Authentication and End-to-End Encrypted Communication Technology Based on DID](https://egp0uc2jnx.feishu.cn/wiki/JyaIwTwngiWi9qkJjjycI4XcnXe?from=from_copylink). With the didall open-source project, any intelligent agent or server can connect to the DID server, register its DID, accept connections from other users, connect to other users, and engage in end-to-end encrypted communication.
 
-## 特点
+## Features
 
-- **跨平台身份认证**：通过DID实现不同平台间的身份互操作性。
-- **端到端加密通信**：使用ECDHE进行短期密钥协商，保证通信的安全性。
-- **高效和安全**：简化身份验证过程，确保数据的保密性和完整性。
+- **Cross-Platform Identity Authentication**: Achieves identity interoperability across different platforms using DID.
+- **End-to-End Encrypted Communication**: Uses ECDHE for short-term key agreement to ensure communication security.
+- **Efficient and Secure**: Simplifies the identity verification process, ensuring data confidentiality and integrity.
 
-### 安装
+### Installation
 
-最新版本已删除pypi，直接安装即可：
+The latest version has been removed from PyPI, so install directly:
 
 ```bash
 pip install didall
 ```
 
-### 运行
+### Usage
 
-在安装完didall库后，可以运行examples目录下的sample代码，可以生成alice和bob的did文件，并且将alice的did文件保存到did server，然后bob可以连接alice的did，进行端到端的加密通信。
+After installing the didall library, you can run the sample code in the examples directory to generate DID files for Alice and Bob, save Alice's DID file to the DID server, and then have Bob connect to Alice's DID for end-to-end encrypted communication.
 
-1. 生成两个did文档alice.json和bob.json，保存到指定文件中，并注册到did server
+1. Generate two DID documents, alice.json and bob.json, save them to the specified files, and register them with the DID server:
 ```bash
 python sample_did.py alice.json
 python sample_did.py bob.json
 ```
 
-2. 启动alice的demo
+2. Start Alice's demo:
 ```bash
 python sample_alice.py alice.json
 ```
 
-3. 启动bob的demo
+3. Start Bob's demo:
 ```bash
 python sample_bob.py bob.json
 ```
 
-可以通过日志看到，alice和bob成功连接，并且进行端到端的加密通信。
+By checking the logs, you can see that Alice and Bob have successfully connected and engaged in end-to-end encrypted communication.
 
-## 贡献
+## Contributing
 
-欢迎对本项目进行贡献。请在提交Pull Request之前阅读贡献指南。
+Contributions to this project are welcome. Please read the contribution guidelines before submitting a pull request.
 
-## 许可证
+## License
     
-本项目基于MIT许可证开源。详细信息请参阅LICENSE文件。
+This project is open-sourced under the MIT License. For more details, please refer to the LICENSE file.
 
-
-## 打包上传（先更改setup.py中版本号）
+## Packaging and Uploading (update the version number in setup.py first)
 
 ```bash
 python setup.py sdist bdist_wheel 
