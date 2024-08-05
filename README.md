@@ -3,6 +3,7 @@
 **Author**: Chang Gaowei  
 **Email**: chgaowei@gmail.com  
 **Website**: [pi-unlimited.com](http://pi-unlimited.com)  
+**中文版本**: [中文版本readme](https://github.com/chgaowei/didall/blob/main/README.cn.md)  
 
 ## Abstract
 
