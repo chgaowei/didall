@@ -84,13 +84,20 @@ def sign_did_document_secp256r1(private_key: ec.EllipticCurvePrivateKey, did_doc
 
     return did_document
 
-def did_generate(communication_service_endpoint: str, router: str="") -> \
+def did_generate(communication_service_endpoint: str, router: str="", 
+                 did_server_domain: str="", did_server_port: int="") -> \
                 Tuple[ec.EllipticCurvePrivateKey, ec.EllipticCurvePublicKey, str, str]:
     private_key = generate_secp256r1_private_key()
     public_key = generate_secp256r1_public_key(private_key)
     bitcoin_address = generate_bitcoin_address(public_key)
 
     did = generate_did(bitcoin_address)
+
+    if did_server_domain:
+        did = did + "@" + did_server_domain
+        if did_server_port:
+            did = did + ":" + str(did_server_port)
+
     if not router:
         router = did
 
