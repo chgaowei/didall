@@ -173,17 +173,19 @@ def generate_router_json(private_key: ec.EllipticCurvePrivateKey, did_document: 
     return router
 
 def verify_did_with_public_key(did: str, public_key: ec.EllipticCurvePublicKey) -> bool:
-    """Verify public key based on DID"""
+    """Verify if the public key matches the DID"""
     try:
-        # Extract Bitcoin address
-        bitcoin_address = did.split(':')[-1]
+        # Extract Bitcoin address from DID
+        did_parts = did.split(':')
+        bitcoin_address = did_parts[2].split('@')[0]
 
         # Generate Bitcoin address from public key
         generated_address = generate_bitcoin_address(public_key)
 
-        # Verify if generated Bitcoin address matches the address in DID
+        # Verify if the generated Bitcoin address matches the address in the DID
         return bitcoin_address == generated_address
     except Exception as e:
+        logging.error(f"Failed to verify DID with public key: {e}")
         return False
 
 def get_pem_from_private_key(private_key: ec.EllipticCurvePrivateKey) -> str:
