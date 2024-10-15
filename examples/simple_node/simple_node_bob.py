@@ -2,12 +2,6 @@ import asyncio
 import json
 import os
 import logging
-import sys
-import os
-
-# Set module import path
-sys.path.append('/Users/cs/work/didall')
-
 
 from didall.simple_node import SimpleNode
 from didall.utils.log_base import set_log_color_level

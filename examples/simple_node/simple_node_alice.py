@@ -3,10 +3,6 @@ import json
 import os
 import logging
 
-import sys
-# Set module import path
-sys.path.append('../../')
-
 from didall.simple_node import SimpleNode
 from didall.utils.log_base import set_log_color_level
 
