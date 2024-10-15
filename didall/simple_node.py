@@ -340,7 +340,7 @@ class SimpleNode:
             # Start a new coroutine to receive messages
             task = asyncio.get_event_loop().create_task(self._receive_client_session_messages(simple_session, remote_did))
             simple_session.set_recv_task(task)
-
+            return True
         else:
             # Close the session
             await websocket.close()
