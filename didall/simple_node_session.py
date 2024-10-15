@@ -9,7 +9,7 @@ import datetime
 import logging
 from typing import Optional, Tuple
 from didall.message_generation import generate_encrypted_message
-from didall.simple_wss_wraper import SimpleWssWraper, HeartbeatTimeoutError
+from didall.simple_wss_wraper import SimpleClientWssWraper, SimpleWssWraper, HeartbeatTimeoutError
 from didall.utils.crypto_tool import generate_random_hex, decrypt_aes_gcm_sha256
 import asyncio
 import json
@@ -40,7 +40,8 @@ class SimpleNodeSession:
         self.recv_task: asyncio.Task = None
         self.heartbeat_task: asyncio.Task = None
 
-        self._start_heartbeat()
+        if isinstance(self.wss_wraper, SimpleClientWssWraper):
+            self._start_heartbeat()
 
     def set_recv_task(self, task: asyncio.Task):
         """
@@ -105,6 +106,26 @@ class SimpleNodeSession:
         await self.wss_wraper.send_data(heartbeat)
         logging.info(f"Heartbeat request sent: {heartbeat}")
 
+    async def _process_short_term_key_negotiation_messages(self):
+        """
+        Internal method to handle "destinationHello" and "finished" messages.
+        Uses new coroutines for asynchronous processing, exits when coroutine cancellation is detected.
+        """
+        try:
+            while True:
+                json_data = await self.wss_wraper.receive_data()
+                msg_type = json_data.get('type')
+                
+                if msg_type in ["destinationHello", "finished"]:
+                    if self.short_term_key_generater:
+                        self.short_term_key_generater.receive_json_message(json_data)
+                    else:
+                        logging.warning("short_term_key_generater is not initialized, unable to process message")
+        except asyncio.CancelledError:
+            logging.info("Key negotiation message processing coroutine has been cancelled")
+        except Exception as e:
+            logging.error(f"Error occurred while processing key negotiation messages: {str(e)}")
+
     async def wait_generate_short_term_key_passive(self) -> Tuple[bool, str, str]:
         """
         As a server, wait and process short-term key negotiation requests in passive mode.
@@ -135,7 +156,15 @@ class SimpleNodeSession:
                                                         is_initiator=False, session_id=session_id)
                         self.short_term_key_generater.receive_json_message(json_data)
 
+                        recv_task = asyncio.create_task(self._process_short_term_key_negotiation_messages())
+
                         success = await self.short_term_key_generater.generate_short_term_key_passive()
+
+                        recv_task.cancel()
+                        try:
+                            await recv_task
+                        except asyncio.CancelledError:
+                            pass
 
                         if success:
                             _, send_encryption_key, \
@@ -170,6 +199,7 @@ class SimpleNodeSession:
                     
                     else:
                         logging.error(f"Unknown message type: {msg_type}")
+
         except asyncio.TimeoutError:
             logging.error("Key negotiation timeout")
             return False, "", ""
@@ -202,7 +232,15 @@ class SimpleNodeSession:
                 is_initiator=True
             )
 
+            recv_task = asyncio.create_task(self._process_short_term_key_negotiation_messages())
+
             success = await self.short_term_key_generater.generate_short_term_key_active()
+
+            recv_task.cancel()
+            try:
+                await recv_task
+            except asyncio.CancelledError:
+                pass
 
             if success:
                 _, send_encryption_key, \

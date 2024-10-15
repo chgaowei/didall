@@ -39,17 +39,19 @@ class SimpleServerWssWraper(SimpleWssWraper):
         self.websocket = websocket
 
     async def send_data(self, data: dict):
-        """Send data to the WebSocket."""
+        """Send data to WebSocket."""
         if self.websocket:
             await self.websocket.send_text(json.dumps(data))
-            logging.info(f"Data sent: {data}")
+            logging.info(f"Message content sent: {data}")
     
     async def receive_data(self, timeout: float = 15.0) -> dict:
-        """Receive data from the WebSocket with a timeout."""
+        """Receive data from WebSocket with timeout."""
         if self.websocket:
             try:
                 data = await asyncio.wait_for(self.websocket.receive_text(), timeout=timeout)
-                return json.loads(data)
+                json_data = json.loads(data)
+                logging.info(f"Message content received: {json_data}")
+                return json_data
             except asyncio.TimeoutError:
                 raise HeartbeatTimeoutError("Heartbeat timeout")
             except json.JSONDecodeError as e:
@@ -58,7 +60,7 @@ class SimpleServerWssWraper(SimpleWssWraper):
         return {}
 
     async def close(self):
-        """Close the WebSocket connection."""
+        """Close WebSocket connection."""
         if self.websocket:
             await self.websocket.close()
             logging.info("WebSocket connection closed")
@@ -69,19 +71,19 @@ class SimpleClientWssWraper(SimpleWssWraper):
         self.websocket = websocket
 
     async def send_data(self, data: dict):
-        """Send data to the WebSocket."""
+        """Send data to WebSocket."""
         if self.websocket:
             await self.websocket.send(json.dumps(data))
-            logging.info(f"Data sent: {data}")
+            logging.info(f"Message content sent: {data}")
 
     async def receive_data(self, timeout: float = 15.0) -> dict:
-        """Receive data from the WebSocket with a timeout."""
+        """Receive data from WebSocket with timeout."""
         try:
             if self.websocket:
                 logging.info(f"Receiving WSS data: {id(self.websocket)}")
                 data = await asyncio.wait_for(self.websocket.recv(), timeout=timeout)
                 json_data = json.loads(data)
-                logging.info(f"Received[{id(self.websocket)}]: {json_data}")
+                logging.info(f"Message content received[{id(self.websocket)}]: {json_data}")
                 return json_data
             else:
                 logging.warning("WebSocket not connected")
@@ -93,7 +95,7 @@ class SimpleClientWssWraper(SimpleWssWraper):
             return {}
 
     async def close(self):
-        """Close the WebSocket connection."""
+        """Close WebSocket connection."""
         if self.websocket:
             await self.websocket.close()
             logging.info("WebSocket connection closed")

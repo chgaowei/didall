@@ -305,6 +305,8 @@ class SimpleNode:
         if not did_document_json:
             logging.error(f"Unable to get DID document: {destination_did}")
             return False
+        
+        logging.info(f"DID [{destination_did}] document: {did_document_json}")  
 
         # Query corresponding WSS address based on DID document
         wss_address = await self._get_wss_address_from_did_document(did_document_json)
