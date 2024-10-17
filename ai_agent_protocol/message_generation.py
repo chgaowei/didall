@@ -19,7 +19,7 @@ from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from cryptography.hazmat.primitives import constant_time
-from didall.utils.crypto_tool import encrypt_aes_gcm_sha256, generate_16_char_from_random_num, generate_random_hex, generate_signature_for_json
+from ai_agent_protocol.utils.crypto_tool import encrypt_aes_gcm_sha256, generate_16_char_from_random_num, generate_random_hex, generate_signature_for_json
 
 def generate_register_message(version: str, 
                               routers: List[Dict[str, Any]]) -> Dict[str, Any]:

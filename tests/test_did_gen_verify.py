@@ -8,8 +8,8 @@
 
 import unittest
 import json
-from didall.utils.did_generate import did_generate, sign_did_document_secp256r1
-from didall.utils.did_verify import verify_did_document, extract_public_key
+from ai_agent_protocol.utils.did_generate import did_generate, sign_did_document_secp256r1
+from ai_agent_protocol.utils.did_verify import verify_did_document, extract_public_key
 from cryptography.hazmat.primitives.asymmetric import ec
 import logging
 

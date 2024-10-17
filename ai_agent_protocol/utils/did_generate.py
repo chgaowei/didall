@@ -15,7 +15,7 @@ from typing import Dict, Any, Tuple
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
-from didall.utils.crypto_tool import generate_secp256r1_private_key, \
+from ai_agent_protocol.utils.crypto_tool import generate_secp256r1_private_key, \
                               generate_secp256r1_public_key, \
                               generate_bitcoin_address, generate_signature_for_json
 

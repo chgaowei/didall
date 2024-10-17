@@ -9,8 +9,8 @@
 import logging
 from typing import Tuple
 import aiohttp
-from didall.utils.crypto_tool import get_pem_from_private_key
-from didall.utils.did_generate import did_generate
+from ai_agent_protocol.utils.crypto_tool import get_pem_from_private_key
+from ai_agent_protocol.utils.did_generate import did_generate
 import requests
 
 class DIDAllClient:

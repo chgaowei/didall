@@ -29,10 +29,10 @@ import json
 import logging
 import traceback
 
-from didall.simple_node_session import SimpleNodeSession
-from didall.simple_wss_wraper import SimpleClientWssWraper, SimpleServerWssWraper, HeartbeatTimeoutError
-from didall.utils.crypto_tool import  get_pem_from_private_key
-from didall.utils.did_generate import did_generate
+from ai_agent_protocol.simple_node_session import SimpleNodeSession
+from ai_agent_protocol.simple_wss_wraper import SimpleClientWssWraper, SimpleServerWssWraper, HeartbeatTimeoutError
+from ai_agent_protocol.utils.crypto_tool import  get_pem_from_private_key
+from ai_agent_protocol.utils.did_generate import did_generate
 
 
 class SimpleNode:

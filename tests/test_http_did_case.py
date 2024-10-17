@@ -8,7 +8,7 @@
 
 import unittest
 from unittest.mock import patch, AsyncMock, MagicMock
-from didall.didallclient import DIDAllClient
+from ai_agent_protocol.didallclient import DIDAllClient
 
 class TestDIDAllClient(unittest.TestCase):
     def setUp(self):
