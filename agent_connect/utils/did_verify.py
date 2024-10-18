@@ -14,8 +14,8 @@ from copy import deepcopy
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.exceptions import InvalidSignature
-from ai_agent_protocol.utils.did_generate import generate_bitcoin_address
-from ai_agent_protocol.utils.crypto_tool import verify_did_with_public_key, verify_signature_for_json
+from agent_connect.utils.did_generate import generate_bitcoin_address
+from agent_connect.utils.crypto_tool import verify_did_with_public_key, verify_signature_for_json
 
 def extract_public_key(did_document: Dict[str, Any], key_id: str) -> ec.EllipticCurvePublicKey:
     """Extract public key from DID document"""

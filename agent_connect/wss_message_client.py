@@ -12,7 +12,7 @@ import websockets
 import json
 import logging
 
-from ai_agent_protocol.utils.crypto_tool import generate_random_hex, generate_router_json, load_private_key_from_pem
+from agent_connect.utils.crypto_tool import generate_random_hex, generate_router_json, load_private_key_from_pem
 from cryptography.hazmat.primitives.asymmetric import ec
 
 class WssMessageClient:

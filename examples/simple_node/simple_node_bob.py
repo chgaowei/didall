@@ -3,8 +3,8 @@ import json
 import os
 import logging
 
-from ai_agent_protocol.simple_node import SimpleNode
-from ai_agent_protocol.utils.log_base import set_log_color_level
+from agent_connect.simple_node import SimpleNode
+from agent_connect.utils.log_base import set_log_color_level
 
 def generate_did_info(bob_node: SimpleNode):
 

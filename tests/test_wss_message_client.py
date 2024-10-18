@@ -11,9 +11,9 @@ import unittest
 import json
 from unittest.mock import ANY, patch, AsyncMock
 
-from ai_agent_protocol.wss_message_client import WssMessageClient
-from ai_agent_protocol.utils.crypto_tool import get_pem_from_private_key
-from ai_agent_protocol.utils.did_generate import did_generate
+from agent_connect.wss_message_client import WssMessageClient
+from agent_connect.utils.crypto_tool import get_pem_from_private_key
+from agent_connect.utils.did_generate import did_generate
 
 class TestWssMessageService(unittest.TestCase):
     def setUp(self):

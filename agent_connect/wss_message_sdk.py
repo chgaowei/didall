@@ -10,10 +10,10 @@ import asyncio
 import json
 import logging
 from typing import Callable, Tuple, Union
-from ai_agent_protocol.message_generation import generate_encrypted_message
-from ai_agent_protocol.wss_message_client import WssMessageClient
-from ai_agent_protocol.short_term_key_generater import ShortTermKeyGenerater
-from ai_agent_protocol.utils.crypto_tool import decrypt_aes_gcm_sha256, generate_random_hex
+from agent_connect.message_generation import generate_encrypted_message
+from agent_connect.wss_message_client import WssMessageClient
+from agent_connect.short_term_key_generater import ShortTermKeyGenerater
+from agent_connect.utils.crypto_tool import decrypt_aes_gcm_sha256, generate_random_hex
 
 # TODO: 
 # Key expiration management, check expiration when using

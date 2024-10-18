@@ -8,7 +8,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="ai-agent-protocol",
+    name="agent-connect",
     version="0.1.5",
     packages=find_packages(),
     install_requires=[
@@ -25,7 +25,7 @@ setup(
     description="An SDK for enabling identity authentication and secure encrypted communication between AI agents.",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url="https://github.com/chgaowei/ai-agent-protocol",
+    url="https://github.com/chgaowei/AgentConnect",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
